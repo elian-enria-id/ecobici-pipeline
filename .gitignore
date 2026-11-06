@@ -1,0 +1,12 @@
+# Datos: raw (~2,7 GB) y bronze/silver/gold (~850 MB) no se versionan; se regeneran con `python main.py`.
+# data/raw/ trae junctions/hardlinks a los CSV originales: nunca deben entrar al repo ni al zip.
+data/raw/*
+!data/raw/.gitkeep
+data/bronze/
+data/silver/
+data/gold/*.parquet
+# Los 5 reportes (CSV chicos) sí se entregan.
+
+*.tmp
+__pycache__/
+.venv/
