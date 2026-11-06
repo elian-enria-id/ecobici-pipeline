@@ -121,4 +121,4 @@ def ejecutar(base: Path):
 
     estado(f"   fact_viajes: {escritor.filas:,} | dim_fecha: {len(dim_fecha):,} | "
            f"dim_estacion: {len(dim_estacion):,} | dim_usuario: {len(dim_usuario):,}", fin=True)
-    print(f"   viajes sin id_usuario: {sin_usuario:,} | con id_usuario ausente en dim_usuario: {usuario_desconocido:,}")
+    estado(f"   viajes sin id_usuario: {sin_usuario:,} | con id_usuario ausente en dim_usuario: {usuario_desconocido:,}", fin=True)

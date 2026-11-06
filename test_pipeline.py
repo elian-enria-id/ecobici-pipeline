@@ -7,8 +7,10 @@ from pathlib import Path
 
 import pandas as pd
 
+from src.consola import fraccion, tiempo
 from src.gold import construir_dim_estacion
 from src.parquet_util import EscritorParquet
+from src.resumen import sparkline
 from src.silver import aplicar_calidad, limpiar_id, normalizar_nombre_estacion, transformar_usuarios, transformar_viajes
 
 
@@ -61,6 +63,15 @@ def test_dim_estacion_nombre_por_anio():
     dim, por_anio = construir_dim_estacion(apariciones)
     assert dim["nombre_estacion"].tolist() == ["PARQUE PATRICIOS II"]  # el más usado del año más reciente
     assert por_anio["nombre_estacion"].tolist() == ["URQUIZA", "PARQUE PATRICIOS II"]
+
+
+def test_sparkline():
+    assert sparkline([0, 1, 5, 10]) == " ▁▄█"  # 0 en blanco; un valor chico igual se ve
+
+
+def test_panel_tiempo_y_avance():
+    assert [tiempo(s) for s in (5, 59.9, 125)] == ["5s", "59s", "2m 05s"]
+    assert fraccion("   viajes 2019: parte 5/10...") == 0.5 and fraccion("armando reportes...") == 0
 
 
 def test_escritor_sin_filas_borra_archivo_viejo():

@@ -33,7 +33,15 @@ python main.py
 
 Corre bronze → silver → gold → reportes de principio a fin (unos minutos). Es idempotente: cada etapa reemplaza sus archivos de salida, así que se puede ejecutar varias veces sin duplicar datos. Durante el desarrollo se puede correr una sola etapa, por ejemplo `python main.py gold`.
 
-Mientras corre, la consola muestra una línea de avance que se reescribe en el lugar (`viajes 2019: parte 5/13...`), para saber que no se colgó.
+Al final se muestra un panel de resumen con los números de cada año: viajes, % de cuarentena contra su umbral, % de viajes circulares, viajes por mes y estación top. El panel se arma con los CSV de `data/gold/reportes/` y no escribe nada. Para verlo sin volver a correr el pipeline: `python main.py resumen`.
+
+Mientras corre en una terminal, se muestra un panel que se redibuja en el lugar (`src/consola.py`). El panel tiene:
+- una fila por etapa (pendiente, corriendo, lista o con error), con su detalle y su tiempo;
+- un bloque por capa;
+- las últimas líneas de resultado;
+- una barra de avance.
+
+Si una etapa falla, el panel la marca en rojo y abajo queda el error completo. Si la salida se redirige a un archivo o a un pipe, se imprime texto simple, sin colores ni redibujo.
 
 ## Tests
 

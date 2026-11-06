@@ -43,8 +43,13 @@ class EscritorParquet:
             self.ruta.unlink(missing_ok=True)
 
 
+panel = None  # src.consola.Panel activo, si la salida es una terminal (lo maneja el propio Panel)
+
+
 def estado(texto: str, fin: bool = False):
     """Línea de estado que se reescribe en el lugar; fin=True la deja fija y baja de línea."""
+    if panel is not None:
+        return panel.actualizar(texto, fin)
     print(f"\r{texto:<79}", end="\n" if fin else "", flush=True)
 
 
